@@ -4,8 +4,18 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="404, 摸鱼の故事">
-    <meta name="description" content="摸鱼の故事">
+    <meta name="keywords" content="LinuX指令（1）, 摸鱼の故事">
+    <meta name="description" content="常用Linux系统管理指令下面是一些可能会用到的指令，找起来困难的话建议使用ctrl+f进行搜索。
+具体指令
+重启指令
+reboot
+shutdown -r now
+
+关机指令
+Halt
+shutdown -h now
+
+另外，可以通过一下">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +27,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>404 | 摸鱼の故事</title>
+    <title>LinuX指令（1） | 摸鱼の故事</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -331,12 +341,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/8.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/23.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">404</h1>
+                    <h1 class="description center-align post-title">LinuX指令（1）</h1>
                 </div>
             </div>
         </div>
@@ -450,9 +460,13 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E5%AD%A6%E4%B9%A0/">
+                                <span class="chip bg-color">学习</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
@@ -464,7 +478,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-11-21
+                    2021-11-23
                 </div>
                 
 
@@ -485,7 +499,73 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                
+                <h1 id="常用Linux系统管理指令"><a href="#常用Linux系统管理指令" class="headerlink" title="常用Linux系统管理指令"></a>常用Linux系统管理指令</h1><p>下面是一些可能会用到的指令，找起来困难的话建议使用<u>ctrl+f</u>进行搜索。</p>
+<h2 id="具体指令"><a href="#具体指令" class="headerlink" title="具体指令"></a>具体指令</h2><hr>
+<h4 id="重启指令"><a href="#重启指令" class="headerlink" title="重启指令"></a>重启指令</h4><blockquote>
+<p>reboot</p>
+<p>shutdown -r now</p>
+</blockquote>
+<h4 id="关机指令"><a href="#关机指令" class="headerlink" title="关机指令"></a>关机指令</h4><blockquote>
+<p>Halt</p>
+<p>shutdown -h now</p>
+</blockquote>
+<p>另外，可以通过一下指令来做到定时关机</p>
+<p> sudo shutdown -h 21:00</p>
+<p>上述指令意为21:00时关机，重启同理。延迟固定时间后关机需要相关指令为sudo shutdown +minutes，举例</p>
+<blockquote>
+<p>sudo shutdown -h +120</p>
+<p><img src="pic5.png"></p>
+</blockquote>
+<p>上述意为 2小时候关机 重启同理</p>
+<h4 id="查询指令"><a href="#查询指令" class="headerlink" title="查询指令"></a>查询指令</h4><blockquote>
+<p>Linux内核版本查询命令：uname –r 或者是  uname –a</p>
+<p><img src="pic1.png"></p>
+<p>显示系统运行时间命令：uptime</p>
+<p><img src="pic2.png"></p>
+<p>查看当前系统内存的使用情况的命令：free</p>
+<p><img src="pic3.png"></p>
+<p>查看登录用户信息的命令：whoami</p>
+<p><img src="pic4.png"></p>
+<p>获取IP地址的命令：dhclient</p>
+<p>查看当前主机IP地址的命令：ifconfig</p>
+<p>查看机器之间网络是否联通：ping（具体使用同Windows）</p>
+<p>查看当前路径：pwd  添加参数-P后作用为查看工作实际路径</p>
+<p>查看目录列表：ls 添加参数-d为仅列出目录，添加参数-l为列出文件或目录的详细信息。-a通常用于查看隐藏文件、-li 可用于查看inode节点相关。</p>
+<p>查看命令或程序源文件位置的指令：which</p>
+</blockquote>
+<h4 id="创建相关"><a href="#创建相关" class="headerlink" title="创建相关"></a>创建相关</h4><blockquote>
+<p>创建目录: mkdir +参数 +目录名称 【注意：该命令需先进入相应位置才能进行创建】常用参数由 -p  可以一次性递归创建目录</p>
+<p>创建文件: touch [选择] 文件名 （可通过修改文件名后缀做到改变文件类型）</p>
+</blockquote>
+<h4 id="操作相关"><a href="#操作相关" class="headerlink" title="操作相关"></a>操作相关</h4><blockquote>
+<p>复制指令: cp [选择] 源文件 目标目录 【常用参数由：-r复制目录  -a保持文件原属性  -s软连接 -l硬连接】</p>
+<p>移动（重命名）指令: mv [选择] 源文件 目标目录 【常用参数：-i 重名提示覆盖  -b建立覆盖备份】</p>
+<p>{关于mv的重命名用法：原名 目标名}</p>
+<p>删除目录 rm 选择 目标文件 【常用参数 -r 删除目录，-f强制删除不提示】</p>
+<p>查找指令: find 目标路径 查找条件 查找具体设定</p>
+<p>举例：find /root -user root 查找所有属于root用户在/root目录下的文件</p>
+<p>find /etc -name pass* 查找/etc目录下所有pass为前缀的文件</p>
+<p>相关参数【-user 用户   -name 名称 -type 类型】</p>
+<p>链接指令 ln 连接源 连接——该情况为硬链接</p>
+<p>ln -s 连接源 符号连接—–该情况为软连接</p>
+</blockquote>
+<h4 id="vi-vim编辑器相关"><a href="#vi-vim编辑器相关" class="headerlink" title="vi/vim编辑器相关"></a>vi/vim编辑器相关</h4><h4 id="vim普通模式"><a href="#vim普通模式" class="headerlink" title="vim普通模式"></a>vim普通模式</h4><blockquote>
+<p>i:光标所在位置开始插入文本。 I：移动到行首再插入文本</p>
+<p>a：在光标位置后插入文本。   A:移动到行尾插入文本</p>
+<p>o:光标下方新开一行并于行首输入 O：光标上方，新开行首输入</p>
+<hr>
+<p>G：移动末行行首      $:移动该行行首</p>
+<p>nG:移动到n行行首</p>
+<hr>
+<p>yy：复制当前行    nyy:当前行开始复制n行     yG:复制当前行开始直到最后一行</p>
+<p>p：粘贴缓冲区的文本到光标所在位置</p>
+<hr>
+<p>ZZ：存盘退出             ZQ:不存盘退出</p>
+</blockquote>
+<h4 id="vim命令行模式"><a href="#vim命令行模式" class="headerlink" title="vim命令行模式"></a>vim命令行模式</h4><blockquote>
+<p>姑且写到这里 停一会</p>
+</blockquote>
+
                 
             </div>
             <hr/>
@@ -511,7 +591,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://tongcaan.github.io/404/index.html">https://tongcaan.github.io/404/index.html</a>
+                    <a href="https://tongcaan.github.io/2021/11/23/LinuX%E6%8C%87%E4%BB%A4%EF%BC%881%EF%BC%89/">https://tongcaan.github.io/2021/11/23/LinuX%E6%8C%87%E4%BB%A4%EF%BC%881%EF%BC%89/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -548,7 +628,11 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/%E5%AD%A6%E4%B9%A0/">
+                                    <span class="chip bg-color">学习</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -989,13 +1073,13 @@
                 <i class="far fa-dot-circle"></i>&nbsp;本篇
             </div>
             <div class="card">
-                <a href="/404/index.html">
+                <a href="/2021/11/23/LinuX%E6%8C%87%E4%BB%A4%EF%BC%881%EF%BC%89/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="404">
+                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="LinuX指令（1）">
                         
-                        <span class="card-title">404</span>
+                        <span class="card-title">LinuX指令（1）</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1006,7 +1090,7 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-11-21
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-11-23
                             </span>
                         <span class="publish-author">
                             
@@ -1018,22 +1102,30 @@
                 </div>
 
                 
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%AD%A6%E4%B9%A0/">
+                        <span class="chip bg-color">学习</span>
+                    </a>
+                    
+                </div>
+                
             </div>
         </div>
         
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/404/index.html">
+                <a href="/2021/11/22/%E4%B8%80%E7%AF%87%E6%91%B8%E9%B1%BC%E8%80%85%E7%9A%84%E6%AD%A3%E5%BC%8F%E6%96%87%E7%AB%A0/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="404">
+                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="摸鱼者的第一篇正式文章">
                         
-                        <span class="card-title">404</span>
+                        <span class="card-title">摸鱼者的第一篇正式文章</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1044,7 +1136,7 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-11-21
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-11-22
                             </span>
                         <span class="publish-author">
                             
@@ -1054,7 +1146,14 @@
                         </span>
                     </div>
                 </div>
-
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E6%91%B8%E9%B1%BC%E4%BA%BA/">
+                        <span class="chip bg-color">摸鱼人</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
