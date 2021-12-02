@@ -633,8 +633,137 @@ shutdown -h now
 <p>i[soft|hard]  创建文件个数的软硬配额</p>
 <p>name 用户或组名</p>
 </blockquote>
+<p>空间使用情况    xfs_quota -x -c “report” /mnt/tom1</p>
+<p>文件创建情况xfs_quota -x -c “report -i” /mnt/tom1</p>
+<p>配额测试        使用如下指令dd    if=/dev/zero    of=/tom1/test1 bs=500M count=1</p>
+<p>if 是输入设备 of是输出的目标文件 bs是块大小  count是数量</p>
 <hr>
-<p>11.24 暂时写到这里 剩下的后面补</p>
+<h3 id="阵列"><a href="#阵列" class="headerlink" title="阵列"></a>阵列</h3><blockquote>
+<p>我用语言描述阵列可能并不是很简单懂，搞张纸画一下会好懂点</p>
+<p>事实上是很简单的东西</p>
+</blockquote>
+<p>RAID-RAID0(下方简写R0)</p>
+<p>R0至少需要两块磁盘，读写独立分离。空间利用率为100%，性能为所有磁盘速度和。无冗余能力。</p>
+<p>说人话：搞了俩一模一样的箱子，往里面丢东西。两边可丢的不一样，可以一边丢一边不丢。要是不小心烧掉了一边，那就真的烧掉了，无法恢复。由于东西太乱，东西很难找（读取能力要弱于R1）</p>
+<hr>
+<p>RAID-RAID1（简写R1）</p>
+<p>R1至少要两磁盘，写入数据时复制到多块磁盘。读取数据时读取速度更快，有冗余性。</p>
+<p>空间利用率（最小盘）/总数    性能：读性能为所有硬盘和    冗余能力：只要有一块正常即可恢复数据。</p>
+<p>说人话：写作业时，你写了一份，因为很重要，所以找了一张一模一样的纸又抄了一份。（很明显，写入数据的时间会增加），那么这种情况两张纸，只能写一半东西。假如你只有一张大纸，一张小纸。你的字有固定大小，你又是个谨慎的不能再谨慎的人，没有备份就会死的那种。那么这种情况，你就只能闲置大纸部分区域，保证大纸跟小纸上的内容完全一致。由于你抄了两份，放在桌子上，更容易拿到了（读取性能UP）</p>
+<hr>
+<p>RAID-RAID0+1（下简写R0+1或R1+0）</p>
+<p>至少是需要4块盘</p>
+<p>首先说R0+1吧    首先是R0，那么让4块盘两两对应。分为AB两组。</p>
+<p>AB两组都用R0方式组合，后将A 与 B均看做一个整体，再将他们组成R1。</p>
+<p>同理可知，R1+0 为AB两组都用R1方式组合，后将A 与 B均看做一个整体，再将他们组成R0</p>
+<p>事实上R1+0或者R0+1效果是类似的。</p>
+<hr>
+<p>RAID-RAID5(R5)</p>
+<p>至少需要3块盘。写入能力比R0差，读取能力近似于R0 允许损坏一块盘</p>
+<p>原理的话 我简单说一下     假如我要记录5这个数字</p>
+<p>那么二进制就会得到 101（2）</p>
+<p>假设校验原理为A+B=C</p>
+<table>
+<thead>
+<tr>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+</tbody></table>
+<p>很明显我们可以通过C得到101（2）</p>
+<p>假设我们去掉A    通过效验原理也能还原出A的原数据。</p>
+<hr>
+<p>阵列指令：mdadm            -f用于假定损坏</p>
+<hr>
+<h3 id="逻辑卷"><a href="#逻辑卷" class="headerlink" title="逻辑卷"></a>逻辑卷</h3><p>简单说一下逻辑卷的创建过程：1.插入一块磁盘(分区 fdisk)—-&gt;转换物理卷(pvcreate)—-&gt;创建卷组(vgcreate)—–&gt;创建逻辑卷(lvcreate)—-&gt;格式化(mkfs.)并挂载（vim /etc/fstab）激活(mount -a)</p>
+<hr>
+<p>相关指令</p>
+<table>
+<thead>
+<tr>
+<th>效果</th>
+<th>物理卷管理</th>
+<th>卷组管理</th>
+<th>逻辑卷管理</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>扫描</td>
+<td>pvscan</td>
+<td>vgscan</td>
+<td>lvscan</td>
+</tr>
+<tr>
+<td>创建</td>
+<td>pvcreate</td>
+<td>vgcreate</td>
+<td>lvcreate</td>
+</tr>
+<tr>
+<td>显示</td>
+<td>pvdisplay</td>
+<td>vgdisplay</td>
+<td>lvdisplay</td>
+</tr>
+<tr>
+<td>删除</td>
+<td>pvremove</td>
+<td>vgremove</td>
+<td>lvremove</td>
+</tr>
+<tr>
+<td>缩减</td>
+<td>—-</td>
+<td>vgreduce</td>
+<td>lvreduce</td>
+</tr>
+<tr>
+<td>拓展</td>
+<td>—-</td>
+<td>vgextend</td>
+<td>lvextend</td>
+</tr>
+</tbody></table>
+<p>删除LV—VG—PV</p>
+<hr>
+<h3 id="用户与组"><a href="#用户与组" class="headerlink" title="用户与组"></a>用户与组</h3><p>UID   0-root    1-999—系统优化    1000—60000</p>
+<p>GID    对应创建者的UID</p>
+<hr>
+<blockquote>
+<p>查看用户及所属组ID    id [选择] [用户名]    -g输出组    -G输出附加组    -n显示名称</p>
+<p>-r 显示真实ID    -u 显示有效ID</p>
+</blockquote>
+<p>/etc/passwd     存储用户相关信息</p>
+<p>格式    用户名: 密码:    UID:    GID:    用户名全称:    主文件夹:    用户所用shell</p>
+<hr>
+<p>/etc/shadow     用户密码及相关</p>
+<p>格式    用户名:    加密密码:    上次修改时间:    最小修改间隔:    密码有效期:    提前多少天警告用户口令过期时间:    密码过期后的宽限天数:    账户过期时间:    保留字段</p>
+<hr>
+<p>/etc/group    组信息</p>
+<p>格式:    用户组:    用户组密码:    GID:    组内用户</p>
+<hr>
+<p>/etc/gshadow    组密码等</p>
+<p>格式:    用户组密码:    用户组管理者:    组成员</p>
+<hr>
+<p>useradd    添加用户</p>
+<p>参数    -才</p>
 
                 
             </div>
